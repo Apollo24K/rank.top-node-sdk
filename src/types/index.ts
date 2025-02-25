@@ -24,7 +24,7 @@ export interface AutoposterConfig extends RankTopConfig {
     authorization: string;
     /**
      * The interval in seconds to post your bot's stats.
-     * @default 20 minutes (minimum 5 minutes)
+     * @default 30 minutes (minimum 5 minutes)
      */
     interval?: number;
 }
