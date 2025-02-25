@@ -7,7 +7,6 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "test": "jest",
     "lint": "eslint src --ext .ts"
   },
   "repository": {
@@ -16,7 +15,17 @@
   },
   "author": "Apollo24K",
   "license": "MIT",
-  "keywords": ["rank", "top", "rank.top", "rank-top", "discord", "bot", "server", "api", "sdk"],
+  "keywords": [
+    "rank",
+    "top",
+    "rank.top",
+    "rank-top",
+    "discord",
+    "bot",
+    "server",
+    "api",
+    "sdk"
+  ],
   "bugs": {
     "url": "https://github.com/Apollo24K/rank.top-node-sdk/issues"
   },
@@ -26,12 +35,9 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.19",
-    "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
     "eslint": "^8.56.0",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.1.2",
     "typescript": "^5.3.3"
   }
 }
