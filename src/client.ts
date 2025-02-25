@@ -100,6 +100,9 @@ export class RankTopClient extends EventEmitter {
             };
         };
 
+        // Wait 1 minute
+        await new Promise(resolve => setTimeout(resolve, 60 * 1000));
+
         let started = false;
         const post = async (): Promise<void> => {
             started = true;
