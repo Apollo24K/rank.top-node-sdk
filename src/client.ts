@@ -88,26 +88,26 @@ export class RankTopClient extends EventEmitter {
                 };
             };
 
-            client.on('ready', async () => {
-                try {
-                    const response = await this.postStats(stats, client.user.id, config.authorization);
-                    if (response?.success) {
-                        this.emit('autoposter/posted', stats);
-                    } else {
-                        this.emit('autoposter/error', response?.message || 'Unknown error');
-                    };
-                } catch (error) {
-                    this.emit('autoposter/error', error);
+            try {
+                const response = await this.postStats(stats, client.user.id, config.authorization);
+                if (response?.success) {
+                    this.emit('autoposter/posted', stats);
+                } else {
+                    this.emit('autoposter/error', response?.message || 'Unknown error');
                 };
-            });
+            } catch (error) {
+                this.emit('autoposter/error', error);
+            };
         };
 
-        // Post stats immediately
-        await postStats();
+        client.on('ready', async () => {
+            // Post stats immediately
+            await postStats();
 
-        // Set up interval for future posts
-        const interval = Math.max(5 * 60, (config.interval || 30 * 60)) * 1000;
-        this.autopostHandler = setInterval(postStats, interval);
+            // Set up interval for future posts
+            const interval = Math.max(5 * 60, (config.interval || 30 * 60)) * 1000;
+            this.autopostHandler = setInterval(postStats, interval);
+        });
     };
 
     stopAutopost(): void {
