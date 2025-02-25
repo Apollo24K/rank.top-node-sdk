@@ -11,7 +11,7 @@ export interface RankTopConfig {
     baseURL?: string;
 }
 
-export interface AutoposterConfig extends RankTopConfig {
+export interface AutoposterConfig {
     /**
      * Your Discord.js client instance
      */
