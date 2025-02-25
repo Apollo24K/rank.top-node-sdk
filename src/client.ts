@@ -28,7 +28,7 @@ export class RankTopClient extends EventEmitter {
     };
 
     private async postStats(stats: PostedStats, botId: string, authorization: string): Promise<PostStatsResponse> {
-        const response = await this.api.post(`/bots/${botId}/stats`, { ...stats, authorization });
+        const response = await this.api.post(`/bots/${botId}/post`, { ...stats, authorization });
         return response.data;
     };
 
@@ -88,16 +88,18 @@ export class RankTopClient extends EventEmitter {
                 };
             };
 
-            try {
-                const response = await this.postStats(stats, client.user.id, config.authorization);
-                if (response?.success) {
-                    this.emit('autoposter/posted', stats);
-                } else {
-                    this.emit('autoposter/error', response?.message || 'Unknown error');
+            client?.on('ready', async () => {
+                try {
+                    const response = await this.postStats(stats, client.user.id, config.authorization);
+                    if (response?.success) {
+                        this.emit('autoposter/posted', stats);
+                    } else {
+                        this.emit('autoposter/error', response?.message || 'Unknown error');
+                    };
+                } catch (error) {
+                    this.emit('autoposter/error', error);
                 };
-            } catch (error) {
-                this.emit('autoposter/error', error);
-            };
+            });
         };
 
         // Post stats immediately

@@ -1,6 +1,6 @@
 # Rank.top SDK
 
-Official SDK for interacting with the Rank.top API.
+Official module for interacting with the Rank.top API.
 
 ## Installation
 
@@ -25,10 +25,7 @@ const rankTop = new RankTopClient({
 
 The SDK includes an autoposter that automatically updates your bot statistics on Rank.top.
 
-**Note:** The autoposter currently only works with a discord.js client. You may need to use our API directly if you are using a different framework.
-
 ```javascript
-// Assuming you have a discord.js client
 import { Client, GatewayIntentBits } from 'discord.js';
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -38,6 +35,8 @@ rankTop.startAutopost({
   authorization: 'BOT_AUTHORIZATION_TOKEN',
 });
 ```
+
+**Note:** The autoposter currently only works with a discord.js client. You may need to use our API directly if you are using a different framework.
 
 ### Events
 

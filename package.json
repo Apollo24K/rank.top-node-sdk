@@ -6,8 +6,11 @@
   "types": "build/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint src --ext .ts",
     "prepare": "npm run build",
-    "lint": "eslint src --ext .ts"
+    "prepublishOnly": "npm run lint",
+    "version": "git add -A",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
