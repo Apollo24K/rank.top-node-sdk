@@ -100,14 +100,25 @@ export class RankTopClient extends EventEmitter {
             };
         };
 
-        client.on('ready', async () => {
+        let started = false;
+        const post = async (): Promise<void> => {
+            started = true;
+
             // Post stats immediately
             await postStats();
 
             // Set up interval for future posts
             const interval = Math.max(5 * 60, (config.interval || 30 * 60)) * 1000;
             this.autopostHandler = setInterval(postStats, interval);
-        });
+        };
+
+        client.on('ready', post);
+
+        if (client.isReady() && !started) {
+            setTimeout(() => {
+                if (!started) post();
+            }, 5000);
+        };
     };
 
     stopAutopost(): void {
