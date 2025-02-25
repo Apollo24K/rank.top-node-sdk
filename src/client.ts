@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { EventEmitter } from 'events';
-import { RankTopConfig, AutoposterConfig, PostStatsResponse, PostedStats, DisableStats, SlashCommand } from './types';
+import { RankTopConfig, AutoposterConfig, PostStatsResponse, PostedStats, DisableStats } from './types';
 
 export declare interface RankTopClient {
     on(event: 'autoposter/posted', listener: (stats: PostedStats) => void): this;
@@ -59,8 +59,8 @@ export class RankTopClient extends EventEmitter {
             // Fetch Slash Commands
             if (!disableStats.commands) {
                 const commands = await client.application?.commands?.fetch?.();
-                if (commands && commands instanceof Array) {
-                    stats.commands = commands.map<SlashCommand>((command: any) => ({
+                if (commands?.map) {
+                    stats.commands = commands.map((command: any) => ({
                         id: command.id,
                         name: command.name,
                         description: command.description,
