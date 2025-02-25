@@ -34,7 +34,7 @@ export class RankTopClient extends EventEmitter {
 
     async startAutopost(config: AutoposterConfig, disableStats: DisableStats | undefined = {}): Promise<void> {
         const client = config?.client;
-        if (!client || !client.user?.id) {
+        if (!client) {
             return console.error('[Rank.top Autoposter] Client is not defined');
         };
 
@@ -88,7 +88,7 @@ export class RankTopClient extends EventEmitter {
                 };
             };
 
-            client?.on('ready', async () => {
+            client.on('ready', async () => {
                 try {
                     const response = await this.postStats(stats, client.user.id, config.authorization);
                     if (response?.success) {
